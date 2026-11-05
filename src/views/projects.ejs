@@ -5,12 +5,30 @@
             <%= title %>
         </h1>
 
-        <h2>Upcoming Service Projects</h2>
-        <ul>
-            <li>Park Cleanup - Join us to clean up local parks and make them beautiful!</li>
-            <li>Food Drive - Help collect and distribute food to those in need.</li>
-            <li>Community Tutoring - Volunteer to tutor students in various subjects.</li>
-        </ul>
+        <% if (projects.length) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <% Object.keys(projects[0]).forEach((field) => { %>
+                            <th scope="col">
+                                <%= field.replaceAll('_', ' ').replace(/\b\w/g, (letter) => letter.toUpperCase()) %>
+                            </th>
+                        <% }) %>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% projects.forEach((project) => { %>
+                        <tr>
+                            <% Object.values(project).forEach((value) => { %>
+                                <td><%= value ?? '' %></td>
+                            <% }) %>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>No hay proyectos disponibles.</p>
+        <% } %>
     </main>
 
     <%- include('partials/footer') %>
