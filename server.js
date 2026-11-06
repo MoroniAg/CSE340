@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import { testConnection } from './src/models/db.js';
 import { getProjects } from './src/models/project.js';
+import { getCategories } from './src/models/catagories.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -41,7 +42,8 @@ app.get('/projects', async (req, res) => {
 
 app.get('/categories', async (req, res) => {
     const title = 'Categories';
-    res.render('categories', { title });
+    const categories = await getCategories();
+    res.render('categories', { title, categories });
 });
 
 app.listen(PORT, async () => {
