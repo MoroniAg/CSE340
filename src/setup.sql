@@ -130,7 +130,7 @@ VALUES
 
 INSERT INTO categories (category_name)
 VALUES
-('Education'),
+('Education Private'),
 ('Environment'),
 ('Community Service');
 
@@ -140,4 +140,15 @@ VALUES
 (1, 3),
 (2, 2),
 (3, 1),
-(3, 2);
+(3, 2),
+(4, 1),
+(5, 2),
+(6, 3),
+(7, 1),
+(8, 2),
+(9,3),
+(10,1),
+(11,2),
+(12,3),
+(13,1),
+(14,2);
