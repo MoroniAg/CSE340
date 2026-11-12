@@ -6,28 +6,17 @@
         </h1>
 
         <% if (projects.length) { %>
-            <table>
-                <thead>
-                    <tr>
-                        <% Object.keys(projects[0]).forEach((field) => { %>
-                            <th scope="col">
-                                <%= field.replaceAll('_', ' ').replace(/\b\w/g, (letter) => letter.toUpperCase()) %>
-                            </th>
-                        <% }) %>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% projects.forEach((project) => { %>
-                        <tr>
-                            <% Object.values(project).forEach((value) => { %>
-                                <td><%= value ?? '' %></td>
-                            <% }) %>
-                        </tr>
-                    <% }) %>
-                </tbody>
-            </table>
+            <ul>
+                <% projects.forEach((project) => { %>
+                    <li>
+                        <a href="/project/<%= project.project_id %>"><%= project.title %></a>
+                        <span> &nbsp; with &nbsp;</span>
+                        <a href="/organization/<%= project.organization_id %>"><%= project.organization_name %></a>
+                    </li>
+                <% }) %>
+            </ul>
         <% } else { %>
-            <p>No hay proyectos disponibles.</p>
+            <p>No upcoming service projects are currently scheduled.</p>
         <% } %>
     </main>
 
