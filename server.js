@@ -3,6 +3,8 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import router from './src/routes.js';
 import { testConnection } from './src/models/db.js';
+import session from 'express-session';
+import flash from './src/middleware/flash.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,6 +17,8 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 
+const SESSION_SECRET = process.env.SESSION_SECRET;
+
 // Set EJS as the templating engine
 app.set('view engine', 'ejs');
 
@@ -22,6 +26,16 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(flash);
+
+// Set up session management
+app.use(session({
+    secret: SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 } // Session expires after 1 hour of inactivity
+}));
 
 // Middleware to log all incoming requests
 app.use((req, res, next) => {
@@ -40,6 +54,8 @@ app.use((req, res, next) => {
 
 app.use(router);
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Catch-all route for 404 errors
 app.use((req, res, next) => {
