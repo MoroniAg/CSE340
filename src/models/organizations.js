@@ -10,6 +10,16 @@ const getOrganizations = async () => {
     return result.rows;
 };
 
+const getAllOrganizations = async () => {
+    const result = await db.query(`
+        SELECT organization_id, name, description, contact_email, logo_filename
+        FROM organization
+        ORDER BY name
+    `);
+
+    return result.rows;
+};
+
 const getOrganizationDetails = async (organizationId) => {
     const query = `
       SELECT
@@ -83,6 +93,7 @@ const updateOrganization = async (organizationId, name, description, contactEmai
 
 export {
     getOrganizations,
+    getAllOrganizations,
     getOrganizationDetails,
     createOrganization,
     updateOrganization
