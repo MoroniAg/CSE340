@@ -1,4 +1,4 @@
-import { getProjectDetails, getUpcomingProjects, updateProject } from '../models/projects.js';
+import { getProjectDetails, getUpcomingProjects, createProject, updateProject } from '../models/projects.js';
 import { getCategoriesByProjectId, getCategoriesByServiceProjectId } from '../models/categories.js';
 import { body, validationResult } from 'express-validator';
 import { getAllOrganizations } from '../models/organizations.js';

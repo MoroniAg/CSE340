@@ -27,8 +27,6 @@ app.set('views', path.join(__dirname, 'src/views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(flash);
-
 // Set up session management
 app.use(session({
     secret: SESSION_SECRET,
@@ -36,6 +34,12 @@ app.use(session({
     saveUninitialized: true,
     cookie: { maxAge: 60 * 60 * 1000 } // Session expires after 1 hour of inactivity
 }));
+
+app.use(flash);
+
+// Parse form and JSON request bodies before routes use req.body
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Middleware to log all incoming requests
 app.use((req, res, next) => {
@@ -53,9 +57,6 @@ app.use((req, res, next) => {
 
 
 app.use(router);
-
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
 // Catch-all route for 404 errors
 app.use((req, res, next) => {
