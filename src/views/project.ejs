@@ -4,7 +4,10 @@
         <h1>
             <%= project.title %>
         </h1>
-        <a href="/edit-project/<%= project.project_id %>">Edit Project</a>
+        <% if (user && user.role_name === 'admin') { %>
+            <a href="/edit-project/<%= project.project_id %>">Edit Project</a>
+            <a href="/assign-categories/<%= project.project_id %>">Edit Project Categories</a>
+        <% } %>
         <p>
             <%= project.description ?? '' %>
         </p>

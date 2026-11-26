@@ -56,6 +56,7 @@ app.use((req, res, next) => {
         res.locals.isLoggedIn = true;
     }
 
+    res.locals.user = req.session.user || null;
     res.locals.NODE_ENV = NODE_ENV;
     next();
 });
@@ -84,7 +85,11 @@ app.use((err, req, res, next) => {
     const context = {
         title: status === 404 ? 'Page Not Found' : 'Server Error',
         error: err.message,
-        stack: err.stack
+        stack: err.stack,
+        isLoggedIn: false,
+        user: null,
+        NODE_ENV,
+        flash: () => ({ success: [], error: [], warning: [], info: [] })
     };
 
     // Render the appropriate error template
