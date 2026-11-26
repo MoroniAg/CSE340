@@ -38,6 +38,9 @@ router.post('/assign-categories/:projectId', processAssignCategoriesForm);
 router.get('/edit-project/:id', showEditProjectForm);
 router.post('/edit-project/:id', projectValidation, processEditProjectForm);
 
+router.get('/register', showUserRegistrationForm);
+router.post('/register', processUserRegistrationForm);
+
 // error-handling routes
 router.get('/test-error', testErrorPage);
 
