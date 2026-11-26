@@ -41,6 +41,10 @@ router.post('/edit-project/:id', projectValidation, processEditProjectForm);
 router.get('/register', showUserRegistrationForm);
 router.post('/register', processUserRegistrationForm);
 
+router.get('/login', showLoginForm);
+router.post('/login', processLoginForm);
+router.get('/logout', processLogout);
+
 // error-handling routes
 router.get('/test-error', testErrorPage);
 
